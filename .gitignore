@@ -1,7 +1,0 @@
-target/
-.idea/
-.vscode/
-*.iml
-.env
-private-evidence/
-.DS_Store
