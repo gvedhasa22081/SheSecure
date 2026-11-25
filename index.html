@@ -1,1 +1,1176 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SheSecure | Digital Safety Portal</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #f5f5fc;
+    color: #25233d;
+}
+
+.sidebar {
+    width: 245px;
+    height: 100vh;
+    background: #19152e;
+    color: white;
+    position: fixed;
+    padding: 25px 18px;
+    overflow-y: auto;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: #b69aff;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #a8a3bc;
+    font-size: 12px;
+    margin-bottom: 35px;
+}
+
+.nav {
+    padding: 15px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #ded9ef;
+}
+
+.nav:hover, .nav.active {
+    background: #7047d7;
+    color: white;
+}
+
+.main {
+    margin-left: 245px;
+    margin-right: 285px;
+    padding: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.header p {
+    color: #77738c;
+    margin-top: 7px;
+}
+
+.hero {
+    background: linear-gradient(120deg,#5930bc,#9972ed);
+    color: white;
+    padding: 32px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    line-height: 1.7;
+    color: #eee5ff;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(145px,1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.card, .panel {
+    background: white;
+    padding: 23px;
+    border-radius: 16px;
+    border: 1px solid #eeebf5;
+    box-shadow: 0 5px 20px #25165008;
+}
+
+.card h3 {
+    font-size: 13px;
+    color: #77738c;
+}
+
+.card h2 {
+    color: #7047d7;
+    font-size: 32px;
+    margin-top: 12px;
+}
+
+.panel {
+    margin-bottom: 20px;
+}
+
+.panel h2 {
+    margin-bottom: 18px;
+    font-size: 21px;
+}
+
+button {
+    background: #7047d7;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+button:hover {
+    background: #5630bb;
+}
+
+button.danger {
+    background: #fce8eb;
+    color: #bd2943;
+}
+
+input:not([type=checkbox]), select, textarea {
+    width: 100%;
+    padding: 13px;
+    margin: 8px 0 17px;
+    border: 1px solid #ddd9e8;
+    border-radius: 9px;
+    background: #fcfbff;
+    font-size: 14px;
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+    animation: appear .3s ease;
+}
+
+@keyframes appear {
+    from {opacity:0; transform:translateY(8px);}
+    to {opacity:1; transform:translateY(0);}
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.check input {
+    width: 19px;
+    height: 19px;
+    accent-color: #7047d7;
+}
+
+.progress {
+    background: #eee9fa;
+    height: 13px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.progress div {
+    height: 100%;
+    background: linear-gradient(90deg,#7047d7,#ae8bff);
+    transition: width .3s;
+}
+
+.news {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 285px;
+    height: 100vh;
+    background: white;
+    padding: 23px;
+    border-left: 1px solid #ece8f4;
+    overflow-y: auto;
+}
+
+.news h2 {
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.news-item {
+    padding: 17px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.news-item small {
+    color: #7047d7;
+    font-weight: 700;
+}
+
+.news-item h4 {
+    font-size: 14px;
+    margin: 9px 0;
+    line-height: 1.5;
+}
+
+a {
+    color: #7047d7;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.muted {
+    color: #77738c;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.record {
+    padding: 18px;
+    background: #f9f7ff;
+    border: 1px solid #e9e1fa;
+    border-radius: 12px;
+    margin: 12px 0;
+    overflow-wrap: anywhere;
+}
+
+.record h3 {
+    margin-bottom: 8px;
+}
+
+.record p {
+    margin: 8px 0;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.tag {
+    display: inline-block;
+    padding: 6px 10px;
+    background: #eae1ff;
+    color: #6039b9;
+    font-size: 12px;
+    border-radius: 20px;
+    margin: 8px 0;
+}
+
+.timeline {
+    border-left: 3px solid #9875e8;
+    padding-left: 20px;
+    margin-left: 8px;
+}
+
+.timeline .record {
+    position: relative;
+}
+
+.timeline .record::before {
+    content: '';
+    position: absolute;
+    left: -29px;
+    top: 23px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #7047d7;
+}
+
+.tip {
+    padding: 18px;
+    border-left: 4px solid #7047d7;
+    background: #f6f2ff;
+    margin: 15px 0;
+    border-radius: 6px;
+    line-height: 1.7;
+}
+
+.status {
+    background: #e5f7ef;
+    color: #18734b;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+#toast {
+    display: none;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #252039;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    z-index: 100;
+    max-width: 90%;
+}
+
+@media(max-width:1100px) {
+    .news {
+        position: static;
+        width: auto;
+        height: auto;
+        margin-left: 245px;
+    }
+
+    .main {
+        margin-right: 0;
+    }
+}
+
+@media(max-width:700px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .nav {
+        display: inline-block;
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .subtitle {
+        margin-bottom: 15px;
+    }
+
+    .main, .news {
+        margin: 0;
+        padding: 18px;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    .header {
+        flex-wrap: wrap;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">🛡 SheSecure</div>
+    <div class="subtitle">YOUR PRIVACY. YOUR POWER.</div>
+
+    <div class="nav active" onclick="showPage('dashboard',this)">
+        ▦ &nbsp; Dashboard
+    </div>
+
+    <div class="nav" onclick="showPage('education',this)">
+        ◈ &nbsp; Privacy Education
+    </div>
+
+    <div class="nav" onclick="showPage('checklist',this)">
+        ☑ &nbsp; Safety Checklist
+    </div>
+
+    <div class="nav" onclick="showPage('incidents',this)">
+        ＋ &nbsp; Incident Records
+    </div>
+
+    <div class="nav" onclick="showPage('vault',this)">
+        🔒 &nbsp; Evidence Vault
+    </div>
+
+    <div class="nav" onclick="showPage('timeline',this)">
+        ◷ &nbsp; Incident Timeline
+    </div>
+
+    <div class="nav" onclick="showPage('support',this)">
+        ♡ &nbsp; Help & Support
+    </div>
+
+    <br><br>
+    <p class="subtitle">
+        SheSecure © 2026<br>
+        Digital Safety Initiative
+    </p>
+
+</aside>
+
+<main class="main">
+
+<div class="header">
+    <div>
+        <h2 id="pageTitle">Dashboard</h2>
+        <p>Your personal digital safety workspace</p>
+    </div>
+    <span class="status">● Local workspace</span>
+</div>
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="section active">
+
+    <div class="hero">
+        <h1>Take Control of Your Digital Safety.</h1>
+        <p>
+            Protect your privacy, document online harassment,
+            preserve evidence and manage your digital safety
+            from one dedicated platform.
+        </p>
+        <br>
+        <button style="background:white;color:#7047d7"
+        onclick="showPage('incidents')">
+            + Record an Incident
+        </button>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Privacy Score</h3>
+            <h2 id="score">0%</h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Incidents</h3>
+            <h2 id="incidentCount">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Encrypted Files</h3>
+            <h2 id="evidenceCount">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Completed Checks</h3>
+            <h2 id="checkCount">0/8</h2>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>Privacy Protection Progress</h2>
+        <div class="progress">
+            <div id="progressBar" style="width:0%"></div>
+        </div>
+        <p class="muted">
+            Complete your safety checklist to improve your privacy score.
+        </p>
+        <br>
+        <button onclick="showPage('checklist')">
+            View Checklist
+        </button>
+    </div>
+
+    <div class="panel">
+        <h2>Recent Incidents</h2>
+        <div id="recentIncidents"></div>
+    </div>
+
+</section>
+
+<!-- PRIVACY EDUCATION -->
+
+<section id="education" class="section">
+
+    <div class="panel">
+        <h2>Digital Privacy Education</h2>
+
+        <div class="tip">
+            <h3>🔑 Password Protection</h3>
+            Use strong, unique passwords for every online account.
+            Enable two-factor authentication wherever possible.
+        </div>
+
+        <div class="tip">
+            <h3>👤 Social Media Privacy</h3>
+            Review your profile visibility, location sharing,
+            friend lists and personal information.
+        </div>
+
+        <div class="tip">
+            <h3>⚠ Online Harassment</h3>
+            Preserve relevant messages, screenshots, URLs and dates.
+            Block and report abusive accounts when safe to do so.
+        </div>
+
+        <div class="tip">
+            <h3>🎣 Phishing Awareness</h3>
+            Avoid suspicious links and unexpected attachments.
+            Never share OTPs or account passwords.
+        </div>
+
+        <div class="tip">
+            <h3>🔒 Evidence Protection</h3>
+            Preserve original evidence and keep secure backups.
+            Avoid publicly sharing sensitive information.
+        </div>
+
+        <div class="tip">
+            <h3>📍 Location Privacy</h3>
+            Disable unnecessary location permissions and
+            avoid publicly sharing your live location.
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CHECKLIST -->
+
+<section id="checklist" class="section">
+
+    <div class="panel">
+        <h2>Personal Privacy Checklist</h2>
+        <p class="muted">
+            Complete each task to improve your digital safety.
+        </p>
+        <br>
+        <div id="checklistItems"></div>
+    </div>
+
+</section>
+
+<!-- INCIDENT RECORDS -->
+
+<section id="incidents" class="section">
+
+    <div class="panel">
+        <h2>Record a New Incident</h2>
+
+        <form id="incidentForm">
+
+            <label>Incident Title</label>
+            <input id="incidentTitle"
+            placeholder="Enter incident title" required>
+
+            <label>Harassment Category</label>
+            <select id="category">
+                <option>Cyberbullying</option>
+                <option>Online Stalking</option>
+                <option>Threatening Messages</option>
+                <option>Identity Theft</option>
+                <option>Fake Profile</option>
+                <option>Privacy Violation</option>
+                <option>Other</option>
+            </select>
+
+            <label>Platform</label>
+            <select id="platform">
+                <option>Instagram</option>
+                <option>WhatsApp</option>
+                <option>Facebook</option>
+                <option>Telegram</option>
+                <option>Email</option>
+                <option>Other</option>
+            </select>
+
+            <label>Incident Date</label>
+            <input type="date" id="incidentDate" required>
+
+            <label>Severity Level</label>
+            <select id="severity">
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+                <option>Critical</option>
+            </select>
+
+            <label>Incident Description</label>
+            <textarea id="description"
+            placeholder="Describe what happened..." required></textarea>
+
+            <button type="submit">Save Incident</button>
+
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2>Saved Incident Records</h2>
+        <div id="incidentList"></div>
+    </div>
+
+</section>
+
+<!-- EVIDENCE VAULT -->
+
+<section id="vault" class="section">
+
+    <div class="panel">
+        <h2>🔒 Encrypted Evidence Vault</h2>
+
+        <p class="muted">
+            Encrypt screenshots, documents and other evidence
+            using AES-256-GCM before storing them in this browser.
+        </p>
+
+        <br>
+
+        <form id="evidenceForm">
+
+            <label>Evidence File</label>
+            <input type="file" id="evidenceFile" required>
+
+            <label>Encryption Passphrase</label>
+            <input type="password" id="vaultPassword"
+            minlength="12"
+            placeholder="Minimum 12 characters" required>
+
+            <p class="muted">
+                Remember your passphrase. It cannot be recovered
+                if forgotten. Maximum file size: 2 MB.
+            </p>
+
+            <br>
+            <button type="submit" id="encryptButton">
+                Encrypt & Save Evidence
+            </button>
+
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2>Stored Evidence</h2>
+        <div id="evidenceList"></div>
+    </div>
+
+</section>
+
+<!-- TIMELINE -->
+
+<section id="timeline" class="section">
+
+    <div class="panel">
+        <h2>Incident Timeline</h2>
+        <p class="muted">
+            Your recorded incidents arranged chronologically.
+        </p>
+        <br>
+        <div class="timeline" id="timelineList"></div>
+    </div>
+
+</section>
+
+<!-- SUPPORT -->
+
+<section id="support" class="section">
+
+    <div class="panel">
+        <h2>Help & Support</h2>
+
+        <div class="tip">
+            <h3>National Cyber Crime Reporting Portal</h3>
+            Report online harassment and cybercrime.
+            <br>
+            <a href="https://cybercrime.gov.in"
+            target="_blank" rel="noopener noreferrer">
+                Visit Official Portal ↗
+            </a>
+        </div>
+
+        <div class="tip">
+            <h3>1930 — Cyber Financial Fraud Helpline</h3>
+            Report financial cyber fraud promptly.
+        </div>
+
+        <div class="tip">
+            <h3>112 — Emergency Assistance</h3>
+            Contact emergency services if you are in immediate danger.
+        </div>
+
+        <div class="tip">
+            <h3>181 — Women's Helpline</h3>
+            Women's assistance and support, subject to local availability.
+        </div>
+
+    </div>
+
+    <div class="panel">
+        <h2>About SheSecure</h2>
+        <p class="muted">
+            SheSecure is an academic digital privacy and online
+            harassment evidence management project.
+            This version stores data locally in your browser.
+            Incident text is not encrypted. Evidence files are encrypted.
+            Clearing browser data may permanently remove records.
+            Use demonstration data rather than real sensitive evidence.
+        </p>
+    </div>
+
+</section>
+
+</main>
+
+<!-- NEWS SIDEBAR -->
+
+<aside class="news">
+
+    <h2>📰 Cyber Safety News</h2>
+    <p class="muted">Explore recent news and awareness articles.</p>
+
+    <div class="news-item">
+        <small>TIMES OF INDIA</small>
+        <h4>Online Harassment and Women's Digital Safety</h4>
+        <a href="https://www.google.com/search?q=site%3Atimesofindia.indiatimes.com+women+online+harassment&tbm=nws"
+        target="_blank" rel="noopener noreferrer">
+            Explore latest articles ↗
+        </a>
+    </div>
+
+    <div class="news-item">
+        <small>CYBER SECURITY</small>
+        <h4>Cyberstalking and Social Media Privacy</h4>
+        <a href="https://www.google.com/search?q=site%3Atimesofindia.indiatimes.com+cyberstalking&tbm=nws"
+        target="_blank" rel="noopener noreferrer">
+            Explore latest articles ↗
+        </a>
+    </div>
+
+    <div class="news-item">
+        <small>DIGITAL AWARENESS</small>
+        <h4>AI Deepfakes and Identity Protection</h4>
+        <a href="https://www.google.com/search?q=site%3Atimesofindia.indiatimes.com+deepfake+women&tbm=nws"
+        target="_blank" rel="noopener noreferrer">
+            Explore latest articles ↗
+        </a>
+    </div>
+
+    <div class="news-item">
+        <small>ONLINE SAFETY</small>
+        <h4>Social Media Scams and Cybercrime Prevention</h4>
+        <a href="https://www.google.com/search?q=site%3Atimesofindia.indiatimes.com+social+media+scams&tbm=nws"
+        target="_blank" rel="noopener noreferrer">
+            Explore latest articles ↗
+        </a>
+    </div>
+
+    <br>
+
+    <div class="tip">
+        <strong>Daily Safety Tip</strong>
+        <p class="muted">
+            Never share your OTP, password or sensitive
+            personal information with unknown individuals.
+        </p>
+    </div>
+
+    <button onclick="showPage('support')">
+        Get Help & Support
+    </button>
+
+</aside>
+
+<div id="toast" role="status"></div>
+
+<script>
+
+const $ = id => document.getElementById(id);
+
+function load(key, fallback) {
+    try {
+        return JSON.parse(localStorage.getItem(key)) ?? fallback;
+    } catch {
+        return fallback;
+    }
+}
+
+let incidents = load("ss_incidents", []);
+let evidence = load("ss_evidence", []);
+let checks = load("ss_checks", {});
+
+const tasks = [
+    "Enable two-factor authentication",
+    "Use strong and unique passwords",
+    "Review social media privacy settings",
+    "Disable unnecessary location sharing",
+    "Remove unknown connected applications",
+    "Review blocked and restricted accounts",
+    "Update devices and security software",
+    "Learn how to report online harassment"
+];
+
+function toast(message) {
+    $("toast").textContent = message;
+    $("toast").style.display = "block";
+    clearTimeout(window.toastTimer);
+    window.toastTimer = setTimeout(() => {
+        $("toast").style.display = "none";
+    }, 3500);
+}
+
+function save(key, value) {
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
+        return true;
+    } catch {
+        toast("Storage is full or unavailable.");
+        return false;
+    }
+}
+
+function escapeHTML(value) {
+    const div = document.createElement("div");
+    div.textContent = String(value);
+    return div.innerHTML;
+}
+
+function showPage(page, element) {
+
+    document.querySelectorAll(".section").forEach(s => {
+        s.classList.remove("active");
+    });
+
+    $(page).classList.add("active");
+
+    document.querySelectorAll(".nav").forEach(n => {
+        n.classList.remove("active");
+    });
+
+    const names = {
+        dashboard: "Dashboard",
+        education: "Privacy Education",
+        checklist: "Safety Checklist",
+        incidents: "Incident Records",
+        vault: "Evidence Vault",
+        timeline: "Incident Timeline",
+        support: "Help & Support"
+    };
+
+    $("pageTitle").textContent = names[page];
+
+    const navs = document.querySelectorAll(".nav");
+    navs[Object.keys(names).indexOf(page)]?.classList.add("active");
+
+    window.scrollTo(0, 0);
+    render();
+}
+
+function renderChecklist() {
+
+    $("checklistItems").innerHTML = tasks.map((task,i) => `
+        <label class="check">
+            <input type="checkbox"
+            ${checks[i] ? "checked" : ""}
+            onchange="updateCheck(${i},this.checked)">
+            ${task}
+        </label>
+    `).join("");
+}
+
+function updateCheck(index, value) {
+    const updated = {...checks, [index]:value};
+    if(save("ss_checks",updated)) {
+        checks = updated;
+    }
+    render();
+}
+
+$("incidentForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const incident = {
+        id: crypto.randomUUID(),
+        title: $("incidentTitle").value,
+        category: $("category").value,
+        platform: $("platform").value,
+        date: $("incidentDate").value,
+        severity: $("severity").value,
+        description: $("description").value
+    };
+
+    const updated = [...incidents, incident];
+
+    if(save("ss_incidents", updated)) {
+        incidents = updated;
+        this.reset();
+        render();
+        toast("Incident saved successfully!");
+    }
+});
+
+function deleteIncident(id) {
+
+    if(!confirm("Delete this incident permanently?")) return;
+
+    const updated = incidents.filter(i => i.id !== id);
+
+    if(save("ss_incidents",updated)) {
+        incidents = updated;
+        render();
+        toast("Incident deleted.");
+    }
+}
+
+function incidentCard(i, removable = true) {
+
+    return `
+        <div class="record">
+            <h3>${escapeHTML(i.title)}</h3>
+
+            <small class="muted">
+                ${escapeHTML(i.date)} |
+                ${escapeHTML(i.platform)}
+            </small>
+
+            <br>
+
+            <span class="tag">
+                ${escapeHTML(i.category)}
+            </span>
+
+            <span class="tag">
+                ${escapeHTML(i.severity)} Severity
+            </span>
+
+            <p>${escapeHTML(i.description)}</p>
+
+            ${removable ? `
+                <button class="danger"
+                onclick="deleteIncident('${i.id}')">
+                    Delete
+                </button>
+            ` : ""}
+        </div>
+    `;
+}
+
+function toBase64(buffer) {
+    const bytes = new Uint8Array(buffer);
+    let binary = "";
+    for(let i=0; i<bytes.length; i+=8192) {
+        binary += String.fromCharCode(...bytes.subarray(i,i+8192));
+    }
+    return btoa(binary);
+}
+
+function fromBase64(value) {
+    return Uint8Array.from(atob(value), c => c.charCodeAt(0));
+}
+
+async function deriveKey(password, salt) {
+
+    const material = await crypto.subtle.importKey(
+        "raw",
+        new TextEncoder().encode(password),
+        "PBKDF2",
+        false,
+        ["deriveKey"]
+    );
+
+    return crypto.subtle.deriveKey(
+        {
+            name: "PBKDF2",
+            salt: salt,
+            iterations: 600000,
+            hash: "SHA-256"
+        },
+        material,
+        {
+            name: "AES-GCM",
+            length: 256
+        },
+        false,
+        ["encrypt","decrypt"]
+    );
+}
+
+$("evidenceForm").addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const file = $("evidenceFile").files[0];
+    const password = $("vaultPassword").value;
+
+    if(!file) return;
+
+    if(file.size > 2 * 1024 * 1024) {
+        toast("Please select a file smaller than 2 MB.");
+        return;
+    }
+
+    $("encryptButton").disabled = true;
+
+    try {
+
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+
+        const key = await deriveKey(password,salt);
+
+        const encrypted = await crypto.subtle.encrypt(
+            {name:"AES-GCM",iv:iv},
+            key,
+            await file.arrayBuffer()
+        );
+
+        const item = {
+            id: crypto.randomUUID(),
+            name: file.name,
+            type: file.type,
+            date: new Date().toLocaleString(),
+            salt: toBase64(salt),
+            iv: toBase64(iv),
+            data: toBase64(encrypted)
+        };
+
+        const updated = [...evidence,item];
+
+        if(save("ss_evidence",updated)) {
+            evidence = updated;
+            this.reset();
+            render();
+            toast("Evidence encrypted and saved!");
+        }
+
+    } catch {
+        toast("Encryption failed. Please use an HTTPS website.");
+    } finally {
+        $("encryptButton").disabled = false;
+    }
+});
+
+async function downloadEvidence(id) {
+
+    const item = evidence.find(i => i.id === id);
+
+    if(!item) return;
+
+    const password = prompt("Enter your encryption passphrase:");
+
+    if(!password) return;
+
+    try {
+
+        const key = await deriveKey(
+            password,
+            fromBase64(item.salt)
+        );
+
+        const decrypted = await crypto.subtle.decrypt(
+            {
+                name:"AES-GCM",
+                iv:fromBase64(item.iv)
+            },
+            key,
+            fromBase64(item.data)
+        );
+
+        const blob = new Blob(
+            [decrypted],
+            {type:"application/octet-stream"}
+        );
+
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+
+        a.href = url;
+        a.download = item.name;
+        a.click();
+
+        setTimeout(() => URL.revokeObjectURL(url),1000);
+
+        toast("Evidence decrypted successfully.");
+
+    } catch {
+        toast("Incorrect passphrase or damaged evidence.");
+    }
+}
+
+function deleteEvidence(id) {
+
+    if(!confirm("Permanently delete this evidence?")) return;
+
+    const updated = evidence.filter(i => i.id !== id);
+
+    if(save("ss_evidence",updated)) {
+        evidence = updated;
+        render();
+        toast("Evidence deleted.");
+    }
+}
+
+function render() {
+
+    const completed = tasks.filter((_,i) => checks[i]).length;
+
+    const score = Math.round(completed / tasks.length * 100);
+
+    $("score").textContent = score + "%";
+    $("checkCount").textContent = completed + "/8";
+    $("incidentCount").textContent = incidents.length;
+    $("evidenceCount").textContent = evidence.length;
+    $("progressBar").style.width = score + "%";
+
+    renderChecklist();
+
+    const sorted = [...incidents].sort(
+        (a,b) => b.date.localeCompare(a.date)
+    );
+
+    const empty = '<p class="muted">No incidents recorded yet.</p>';
+
+    $("incidentList").innerHTML =
+        sorted.map(i => incidentCard(i)).join("") || empty;
+
+    $("recentIncidents").innerHTML =
+        sorted.slice(0,3).map(i => incidentCard(i,false)).join("") || empty;
+
+    $("timelineList").innerHTML =
+        sorted.map(i => incidentCard(i,false)).join("") || empty;
+
+    $("evidenceList").innerHTML = evidence.map(i => `
+
+        <div class="record">
+            <h3>🔒 ${escapeHTML(i.name)}</h3>
+
+            <p class="muted">${escapeHTML(i.date)}</p>
+
+            <span class="tag">AES-256-GCM Encrypted</span>
+
+            <br><br>
+
+            <button onclick="downloadEvidence('${i.id}')">
+                Decrypt & Download
+            </button>
+
+            <button class="danger"
+            onclick="deleteEvidence('${i.id}')">
+                Delete
+            </button>
+        </div>
+
+    `).join("") ||
+    '<p class="muted">No evidence uploaded yet.</p>';
+}
+
+render();
+
+</script>
+
+</body>
+</html>
